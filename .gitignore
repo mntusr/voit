@@ -1,0 +1,6 @@
+**/*.pyc
+typings/*
+.vscode
+*.blend
+*.blend*
+pyrightconfig.json
