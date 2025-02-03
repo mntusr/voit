@@ -19,7 +19,7 @@ You can then install VOIT from PIP or its GitHub repository.
 From PIP:
 
 ```
-pip install voit
+pip install voit-inserter
 ```
 
 From GitHub:
