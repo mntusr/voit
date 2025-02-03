@@ -1,0 +1,46 @@
+name: "Publish to testpypi"
+
+on:
+  - workflow_dispatch
+
+jobs:
+    build:
+      name: Build release
+      runs-on: ubuntu-latest
+      steps:
+        - name: Check out
+          uses: actions/checkout@v4
+          with:
+            persist-credentials: false
+        - name: Set up python
+          uses: actions/setup-python@v5
+          with:
+            python-version: "3.x"
+        - name: Install build
+          run: python -m pip install --upgrade build
+        - name: Build package
+          run: python -m build
+        - name: Store source dist and whl
+          uses: actions/upload-artifact@v4
+          with:
+            name: testpypi-dists
+            path: dist/
+    testpypi-publish:
+      name: Upload release to TestPyPI
+      runs-on: ubuntu-latest
+      needs: build
+      environment:
+        name: testpypi
+        url: https://test.pypi.org/p/voit_inserter
+      permissions:
+        id-token: write  # IMPORTANT: this permission is mandatory for trusted publishing
+      steps:
+        - name: Load source dist and whl
+          uses: actions/download-artifact@v4
+          with:
+            name: testpypi-dists
+            path: dist/
+        - name: Publish source dist and whl to TestPyPI
+          uses: pypa/gh-action-pypi-publish@release/v1
+          with:
+            repository-url: https://test.pypi.org/legacy/
