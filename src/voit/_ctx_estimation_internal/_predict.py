@@ -288,7 +288,7 @@ class CtxPredictor:
 
         checkpoints_zip_path = checkpoint_dir / "environment_estim_checkpoints.zip"
         # weights_url = "http://localhost:9000/environment_estim_checkpoints.zip"
-        weights_url = "https://github.com/mntusr/voit/releases/download/v0_1/environment_estim_checkpoints.zip"
+        weights_url = "https://github.com/mntusr/voit/releases/download/v0.1.1/environment_estim_checkpoints.zip"
         try:
             _, msg = urllib.request.urlretrieve(
                 weights_url,
