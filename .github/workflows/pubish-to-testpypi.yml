@@ -3,6 +3,9 @@ name: "Publish to testpypi"
 on:
   - workflow_dispatch
 
+permissions:
+  contents: read
+
 jobs:
     build:
       name: Build release
